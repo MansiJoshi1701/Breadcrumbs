@@ -4,28 +4,33 @@ import { useParams } from 'react-router-dom'
 function ProductDetails() {
 
   const { id } = useParams();
-  const [product , setProduct] = useState([]);
+  const [product , setProduct] = useState(null);
+  const [loading , setLoading] = useState(true);
 
-  //1. Get all data from the source
+
   useEffect(() => {
 
     fetch(`https://dummyjson.com/products/${id}`)
     .then(res => res.json())  
-    .then(res => setProduct(res))
+    .then(res => {
+      setProduct(res);
+      setLoading(false);
+    })
     
   } , [id])
-  //2. Filter the data based on id
-  //3. Display details of filtered data
+
 
   return (
     <div>
       <h1>Product Details</h1>
-      <div>
-        <img src={product.thumbnail} alt={id} />
-        <h3>{product.title}</h3>
-        <h3>${product.price}</h3>
-        <h3>{product.description}</h3>
-      </div>
+      {loading ? <p>Loading...</p> :
+        <div>
+          <img src={product.thumbnail} alt={id} />
+          <h3>{product.title}</h3>
+          <h3>${product.price}</h3>
+          <p>{product.description}</p>
+        </div>
+      }
     </div>
     
   )

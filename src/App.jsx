@@ -4,6 +4,7 @@ import './App.css'
 import Home from './components/Home'
 import ProductListing from './components/ProductListing'
 import ProductDetails from './components/ProductDetails'
+import Breadcrumbs from './components/Breadcrumbs'
 
 function App() {
   
@@ -13,7 +14,7 @@ function App() {
       <div className='app'>
         <h1>My Store</h1>
 
-        {/* Breadcrumbs */}
+        <Breadcrumbs />
 
         <Routes>
           <Route path='/' element={<Home />} />
